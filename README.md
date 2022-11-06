@@ -21,6 +21,9 @@ Es gibt setMethod da muss der offset des register, value von enc_val eingegeben
 Zb zum starten 232,85
 offset von status_manged und für Value ON ist 85 OFF ist 170 also 232,170
 
+setzen der Temperatur auf 38Grad (temp_air = 32893 formular= /2 = 76/2 = 38
+32893, 76
+
 ## Fragen Diskussion
 
 https://forum.iobroker.net/topic/59744/test-adapter-micronova-easy-connect-plus
