@@ -1,0 +1,104 @@
+{
+  "common": {
+    "name": "micronova",
+    "version": "0.0.1",
+    "news": {
+      "0.0.1": {
+        "en": "initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "lançamento inicial",
+        "nl": "Eerste uitgave",
+        "fr": "Première version",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "zh-cn": "首次出版"
+      }
+    },
+    "title": "Micronova Easy Connect Plus",
+    "titleLang": {
+      "en": "Micronova Easy Connect Plus",
+      "de": "Micronova Easy Connect Plus",
+      "ru": "Микронова Easy Connect Плюс",
+      "pt": "Micronova Easy Connect Plus",
+      "nl": "Micronova Easy Connect Plus",
+      "fr": "Micronova Easy Connect Plus",
+      "it": "Micronova Easy Connect Plus",
+      "es": "Conexión fácil Plus de Micronova",
+      "pl": "Micronova Easy Connect Plus",
+      "zh-cn": "Micronova Easy Connect Plus"
+    },
+    "desc": {
+      "en": "Adapter for Micronova devices",
+      "de": "Adapter für Micronova-Geräte",
+      "ru": "Адаптер для устройств Micronova",
+      "pt": "Adaptador para dispositivos Micronova",
+      "nl": "Adapter voor Micronova-apparaten",
+      "fr": "Adaptateur pour appareils Micronova",
+      "it": "Adattatore per dispositivi Micronova",
+      "es": "Adaptador para dispositivos Micronova",
+      "pl": "Adapter do urządzeń Micronova",
+      "zh-cn": "Micronova 设备的适配器"
+    },
+    "authors": ["TA2k <tombox2020@gmail.com>"],
+    "keywords": ["micronova", "easy connect plus"],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "main": "main.js",
+    "icon": "micronova.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/TA2k/ioBroker.micronova/main/admin/micronova.png",
+    "readme": "https://github.com/TA2k/ioBroker.micronova/blob/main/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "climate-control",
+    "compact": true,
+    "connectionType": "cloud",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=3.3.22"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.2.28"
+      }
+    ]
+  },
+  "encryptedNative": ["password"],
+  "protectedNative": ["password"],
+  "native": {
+    "username": "",
+    "password": "",
+    "interval": 10
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Device or service connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
+}
