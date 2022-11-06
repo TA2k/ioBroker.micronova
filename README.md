@@ -15,6 +15,16 @@
 
 Adapter for Micronova devices
 
+## **Steuern**
+
+Es gibt setMethod da muss der offset des register, value von enc_val eingegeben
+Zb zum starten 232,85
+offset von status_manged und für Value ON ist 85 OFF ist 170 also 232,170
+
+## Fragen Diskussion
+
+https://forum.iobroker.net/topic/59744/test-adapter-micronova-easy-connect-plus
+
 ## Changelog
 
 ### 0.0.1

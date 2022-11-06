@@ -137,7 +137,13 @@ class Micronova extends utils.Adapter {
 
             const remoteArray = [
               { command: "Refresh", name: "True = Refresh" },
-              { command: "setMethod", name: "Items, Values", def: "232,85", type: "string", role: "text" },
+              {
+                command: "setMethod",
+                name: "Item/offset from register, Value from enc_val",
+                def: "232,85",
+                type: "string",
+                role: "text",
+              },
             ];
             remoteArray.forEach((remote) => {
               this.setObjectNotExists(id + ".remote." + remote.command, {
@@ -224,7 +230,7 @@ class Micronova extends utils.Adapter {
           if (error.response) {
             if (error.response.status === 401) {
               error.response && this.log.debug(JSON.stringify(error.response.data));
-              this.log.info(element.path + " receive 401 error. Refresh Token in 60 seconds");
+              this.log.info(" receive 401 error. Refresh Token in 60 seconds");
               this.refreshTokenTimeout && clearTimeout(this.refreshTokenTimeout);
               this.refreshTokenTimeout = setTimeout(() => {
                 this.refreshToken();
@@ -233,7 +239,7 @@ class Micronova extends utils.Adapter {
               return;
             }
           }
-          this.log.error(element.url);
+
           this.log.error(error);
           error.response && this.log.error(JSON.stringify(error.response.data));
         });
@@ -272,7 +278,7 @@ class Micronova extends utils.Adapter {
     if (state) {
       if (!state.ack) {
         const deviceId = id.split(".")[2];
-        let command = id.split(".")[4];
+        // const command = id.split(".")[4];
 
         const device = this.deviceDict[deviceId];
         if (id.split(".")[4] === "Refresh") {
@@ -283,7 +289,7 @@ class Micronova extends utils.Adapter {
           this.log.info("Value is empty");
           return;
         }
-        let values = state.val.replace(/ /g, "").split(",");
+        const values = state.val.replace(/ /g, "").split(",");
         if (values.length !== 2) {
           this.log.info("Value is not correct");
           return;
