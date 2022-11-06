@@ -295,8 +295,7 @@ class Micronova extends utils.Adapter {
             Host: "remote.mcz.it",
             id_brand: "1",
             Accept: "application/json, text/javascript, */*; q=0.01",
-            Authorization:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IkRCMzY2NzRGLUU3NEYtNEMzRS05NTRBLTBGQjVBMTcwQTkzQyIsImp3dGlkIjoiYTdhZTY4ZTgtOGFhMy00MzE1LWI2M2QtYzRiZDI5ODExYWJkIiwiZW1haWwiOiJwYWVkdXJAYmx1ZXdpbi5jaCIsImN1c3RvbWVyX2NvZGUiOiI3NDYzMTgiLCJpZF9hcHAiOiI2REZBNDdBNi0xRTc4LTQ0RDgtQTAzNi0xMzYzQzE3MUIzQkIiLCJpZF9icmFuZCI6IjEiLCJpYXQiOjE2Njc3NjEzNjIsImV4cCI6MTY2Nzg0Nzc2Mn0.Wxuww0vatvFZnO1rwBeg7Oa4jrzG1v3IZojaoT3K-WY",
+            Authorization: this.session.token,
             "Accept-Language": "de-de",
             "Content-Type": "application/json; charset=utf-8",
             "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
