@@ -81,8 +81,8 @@ class Micronova extends utils.Adapter {
     })
       .then((res) => {
         this.log.debug(JSON.stringify(res.data));
-        if (res.data.result) {
-          this.session = res.data.result;
+        if (res.data) {
+          this.session = res.data;
           this.setState("info.connection", true, true);
         }
       })
