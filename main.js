@@ -294,6 +294,17 @@ class Micronova extends utils.Adapter {
           this.log.info("Value is not correct");
           return;
         }
+        const data = {
+          id_product: device.id_product,
+          id_device: device.id_device,
+          Protocol: "RWMSmaster",
+          BitData: [8],
+          Endianess: ["L"],
+          Items: [values[0]],
+          Masks: [65535],
+          Values: [values[1]],
+        };
+        this.log.info(`Send data: ${JSON.stringify(data)}`);
         await this.requestClient({
           method: "post",
           url: "https://remote.mcz.it/deviceRequestWriting",
@@ -308,16 +319,7 @@ class Micronova extends utils.Adapter {
             local: "false",
             customer_code: "746318",
           },
-          data: {
-            id_product: device.id_product,
-            id_device: device.id_device,
-            Protocol: "RWMSmaster",
-            BitData: [8],
-            Endianess: ["L"],
-            Items: [values[0]],
-            Masks: [65535],
-            Values: [values[1]],
-          },
+          data: data,
         })
           .then((res) => {
             this.log.info(JSON.stringify(res.data));
