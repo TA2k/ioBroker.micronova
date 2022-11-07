@@ -160,6 +160,51 @@ class Micronova extends utils.Adapter {
               });
             });
             this.json2iob.parse(id + ".general", device, { forceIndex: true });
+            await this.requestClient({
+              method: "post",
+              url: "https://remote.mcz.it/deviceGetRegistersMap",
+              headers: {
+                Host: "remote.mcz.it",
+                id_brand: "1",
+                Accept: "application/json, text/javascript, */*; q=0.01",
+                Authorization: this.session.token,
+                "Accept-Language": "de-de",
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
+                local: "false",
+                customer_code: "746318",
+              },
+              data: {
+                id_product: device.id_product,
+                id_device: device.id_device,
+                last_update: null,
+              },
+            })
+              .then(async (res) => {
+                this.log.debug(JSON.stringify(res.data));
+                if (!res.data) {
+                  return;
+                }
+
+                let data = res.data.device_registers_map;
+                if (data.registers_map) {
+                  data = data.registers_map[0];
+                }
+
+                const forceIndex = true;
+                const preferedArrayName = null;
+
+                this.json2iob.parse(device.id_device + ".register", data, {
+                  forceIndex: forceIndex,
+                  write: true,
+                  preferedArrayName: preferedArrayName,
+                  channelName: "Register of device",
+                });
+              })
+              .catch((error) => {
+                this.log.error(error);
+                error.response && this.log.error(JSON.stringify(error.response.data));
+              });
           }
         }
       })
@@ -175,7 +220,7 @@ class Micronova extends utils.Adapter {
 
       await this.requestClient({
         method: "post",
-        url: "https://remote.mcz.it/deviceGetRegistersMap",
+        url: "https://remote.mcz.it/deviceGetBufferReading",
         headers: {
           Host: "remote.mcz.it",
           id_brand: "1",
@@ -190,41 +235,56 @@ class Micronova extends utils.Adapter {
         data: {
           id_product: device.id_product,
           id_device: device.id_device,
-          last_update: null,
+          BufferId: 1,
         },
       })
         .then(async (res) => {
           this.log.debug(JSON.stringify(res.data));
-          if (!res.data) {
+          if (!res.data || !res.data.Success === false) {
+            this.log.error(JSON.stringify(res.data));
             return;
           }
-
-          let data = res.data.device_registers_map;
-          if (data.registers_map) {
-            data = data.registers_map[0];
+          const idRequest = res.data.idRequest;
+          let response = "";
+          while (response === "") {
+            await this.sleep(10000);
+            response = await this.requestClient({
+              method: "get",
+              url: "https://remote.mcz.it/deviceJobStatus/" + idRequest,
+              headers: {
+                Host: "remote.mcz.it",
+                "Content-Type": "application/json; charset=utf-8",
+                "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
+                local: "false",
+                Accept: "application/json, text/javascript, */*; q=0.01",
+                "Accept-Language": "de-de",
+                Authorization: this.session.token,
+                customer_code: "746318",
+                id_brand: "1",
+              },
+            })
+              .then(async (res) => {
+                this.log.debug(JSON.stringify(res.data));
+                if (!res.data || !res.data.Success === false) {
+                  this.log.error(JSON.stringify(res.data));
+                  return {};
+                }
+                if (res.data.jobAnswerStatus !== "completed") {
+                  return "";
+                }
+                const data = res.data.jobAnswerData;
+                this.json2iob.parse(device.id_device + ".status", data, {
+                  forceIndex: true,
+                  write: true,
+                  preferedArrayName: null,
+                  channelName: "status of device",
+                });
+              })
+              .catch((error) => {
+                this.log.error(error);
+                error.response && this.log.error(JSON.stringify(error.response.data));
+              });
           }
-
-          const forceIndex = true;
-          const preferedArrayName = null;
-
-          this.json2iob.parse(device.id_device + ".status", data, {
-            forceIndex: forceIndex,
-            write: true,
-            preferedArrayName: preferedArrayName,
-            channelName: "Status of device",
-          });
-          // await this.setObjectNotExistsAsync(element.path + ".json", {
-          //   type: "state",
-          //   common: {
-          //     name: "Raw JSON",
-          //     write: false,
-          //     read: true,
-          //     type: "string",
-          //     role: "json",
-          //   },
-          //   native: {},
-          // });
-          // this.setState(element.path + ".json", JSON.stringify(data), true);
         })
         .catch((error) => {
           if (error.response) {
@@ -245,7 +305,9 @@ class Micronova extends utils.Adapter {
         });
     }
   }
-
+  sleep(duration) {
+    return new Promise((resolve) => setTimeout(resolve, duration));
+  }
   async refreshToken() {
     this.log.debug("Refresh token");
     await this.login();

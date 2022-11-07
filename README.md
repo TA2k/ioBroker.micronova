@@ -17,7 +17,7 @@ Adapter for Micronova devices
 
 ## **Steuern**
 
-Es gibt setMethod da muss der offset des register, value von enc_val eingegeben
+Es gibt setMethod. Eingabe ist das offset des register und value von enc_val oder eignen Wert eingegeben
 Zb zum starten 232,85
 offset von status_manged und für Value ON ist 85 OFF ist 170 also 232,170
 
