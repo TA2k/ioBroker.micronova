@@ -240,7 +240,7 @@ class Micronova extends utils.Adapter {
       })
         .then(async (res) => {
           this.log.debug(JSON.stringify(res.data));
-          if (!res.data || !res.data.Success === false) {
+          if (!res.data || res.data.Success === false) {
             this.log.error(JSON.stringify(res.data));
             return;
           }
@@ -248,6 +248,7 @@ class Micronova extends utils.Adapter {
           let response = "";
           while (response === "") {
             await this.sleep(10000);
+            this.log.debug("Waiting for response");
             response = await this.requestClient({
               method: "get",
               url: "https://remote.mcz.it/deviceJobStatus/" + idRequest,
