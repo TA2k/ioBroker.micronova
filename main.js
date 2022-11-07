@@ -247,7 +247,7 @@ class Micronova extends utils.Adapter {
           const idRequest = res.data.idRequest;
           let response = "";
           while (response === "") {
-            await this.sleep(12000);
+            await this.sleep(13000);
             this.log.debug("Waiting for response");
             response = await this.requestClient({
               method: "get",
@@ -270,8 +270,12 @@ class Micronova extends utils.Adapter {
                   this.log.error(JSON.stringify(res.data));
                   return {};
                 }
-                if (res.data.jobAnswerStatus !== "completed") {
+
+                if (res.data.jobAnswerStatus === "waiting") {
                   return "";
+                }
+                if (res.data.jobAnswerStatus !== "completed") {
+                  return {};
                 }
                 const data = res.data.jobAnswerData;
                 this.json2iob.parse(device.id_device + ".status", data, {
