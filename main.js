@@ -300,9 +300,9 @@ class Micronova extends utils.Adapter {
           Protocol: "RWMSmaster",
           BitData: [8],
           Endianess: ["L"],
-          Items: [values[0]],
+          Items: [parseInt(values[0])],
           Masks: [65535],
-          Values: [values[1]],
+          Values: [parseInt(values[1])],
         };
         this.log.info(`Send data: ${JSON.stringify(data)}`);
         await this.requestClient({
