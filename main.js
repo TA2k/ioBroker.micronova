@@ -221,12 +221,14 @@ class Micronova extends utils.Adapter {
                   data = data.registers_map[0];
                 }
 
-                const forceIndex = true;
-                const preferedArrayName = null;
+                const forceIndex = false;
+                const preferedArrayName = "offset";
+                const preferedArrayDesc = "reg_key";
 
                 this.json2iob.parse(device.id_device + ".register", data, {
                   forceIndex: forceIndex,
                   write: true,
+                  preferedArrayDesc: preferedArrayDesc,
                   preferedArrayName: preferedArrayName,
                   channelName: "Register of device",
                 });
