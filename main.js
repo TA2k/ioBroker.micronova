@@ -7,7 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require("@iobroker/adapter-core");
-const axios = require("axios");
+const axios = require("axios").default;
 const Json2iob = require("./lib/json2iob");
 class Micronova extends utils.Adapter {
   /**
@@ -26,6 +26,37 @@ class Micronova extends utils.Adapter {
 
     this.json2iob = new Json2iob(this);
     this.requestClient = axios.create();
+    this.ids = {
+      eva: { name: "EvaCalòr - PuntoFuoco", id: "635987", url: "https://evastampaggi.agua-iot.com" },
+      elfi: { name: "Elfire Wifi", id: "402762", url: "https://elfire.agua-iot.com" },
+      karm: { name: "Karmek Wifi", id: "403873", url: "https://karmekone.agua-iot.com" },
+      easy: { name: "Easy Connect", id: "354924", url: "https://remote.mcz.it" },
+      easyplus: { name: "Easy Connect Plus", id: "746318", url: "https://remote.mcz.it" },
+      easypoel: { name: "Easy Connect Poêle", id: "354925", url: "https://remote.mcz.it" },
+      lor: { name: "Lorflam Home", id: "121567", url: "https://lorflam.agua-iot.com" },
+      lmx: { name: "LMX Remote Control", id: "352678", url: "https://laminox.agua-iot.com" },
+      bor: { name: "Boreal Home", id: "173118", url: "https://boreal.agua-iot.com" },
+      bron: { name: "Bronpi Home", id: "164873", url: "https://bronpi.agua-iot.com" },
+      eoss: { name: "EOSS WIFI", id: "326495", url: "https://solartecnik.agua-iot.com" },
+      lami: { name: "LAMINOXREM REMOTE CONTROL 2.0", id: "352678", url: "https://laminox.agua-iot.com" },
+      jolly: { name: "Jolly Mec Wi Fi", id: "732584", url: "https://jollymec.agua-iot.com" },
+      globe: { name: "Globe-fire", id: "634876", url: "https://globefire.agua-iot.com" },
+      ts: { name: "TS Smart", id: "046629", url: "https://timsistem.agua-iot.com" },
+      stuf: { name: "Stufe a pellet Italia", id: "015142", url: "https://stufepelletitalia.agua-iot.com" },
+      my: { name: "My Corisit", id: "101427", url: "https://mycorisit.agua-iot.com" },
+      font: { name: "Fonte Flamme contrôle 1", id: "848324", url: "https://fonteflame.agua-iot.com" },
+      klov: { name: "Klover Home", id: "143789", url: "https://klover.agua-iot.com" },
+      nord: { name: "Nordic Fire 2.0", id: "132678", url: "https://nordicfire.agua-iot.com" },
+      go: { name: "GO HEAT", id: "859435", url: "https://amg.agua-iot.com" },
+      wip: { name: "Wi-Phire", id: "521228", url: "https://lineavz.agua-iot.com" },
+      ther: { name: "Thermoflux", id: "391278", url: "https://thermoflux.agua-iot.com" },
+      dar: { name: "Darwin Evolution", id: "475219", url: "https://cola.agua-iot.com" },
+      mor: { name: "Moretti design", id: "624813", url: "https://moretti.agua-iot.com" },
+      fon: { name: "Fontana Forni", id: "505912", url: "https://fontanaforni.agua-iot.com" },
+      myp: { name: "MyPiazzetta (MySuperior?)", id: "458632", url: "https://piazzetta.agua-iot.com" },
+      alf: { name: "Alfaplam", id: "862148", url: "https://alfaplam.agua-iot.com" },
+      nin: { name: "Nina", id: "999999", url: "https://micronova.agua-iot.com" },
+    };
   }
 
   /**
@@ -42,6 +73,10 @@ class Micronova extends utils.Adapter {
       this.log.error("Please set username and password in the instance settings");
       return;
     }
+    if (!this.config.type) {
+      this.log.error("Please set app in the instance settings");
+      return;
+    }
 
     this.updateInterval = null;
     this.reLoginTimeout = null;
@@ -49,7 +84,7 @@ class Micronova extends utils.Adapter {
     this.session = {};
     this.subscribeStates("*");
 
-    this.log.info("Login to Easy connect plus");
+    this.log.info("Login to " + this.ids[this.config.type].name);
     await this.login();
     if (this.session.token) {
       await this.getDeviceList();
@@ -65,9 +100,8 @@ class Micronova extends utils.Adapter {
   async login() {
     await this.requestClient({
       method: "post",
-      url: "https://remote.mcz.it/userLogin",
+      url: this.ids[this.config.type].url + "/userLogin",
       headers: {
-        Host: "remote.mcz.it",
         id_brand: "1",
         Accept: "application/json, text/javascript, */*; q=0.01",
         Authorization: "6DFA47A6-1E78-44D8-A036-1363C171B3BB",
@@ -75,7 +109,7 @@ class Micronova extends utils.Adapter {
         "Content-Type": "application/json; charset=utf-8",
         "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
         local: "true",
-        customer_code: "746318",
+        customer_code: this.ids[this.config.type].id,
       },
       data: { email: this.config.username, password: this.config.password },
     })
@@ -95,9 +129,8 @@ class Micronova extends utils.Adapter {
   async getDeviceList() {
     await this.requestClient({
       method: "post",
-      url: "https://remote.mcz.it/deviceList",
+      url: this.ids[this.config.type].url + "/deviceList",
       headers: {
-        Host: "remote.mcz.it",
         id_brand: "1",
         Accept: "application/json, text/javascript, */*; q=0.01",
         Authorization: this.session.token,
@@ -105,7 +138,7 @@ class Micronova extends utils.Adapter {
         "Content-Type": "application/json; charset=utf-8",
         "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
         local: "false",
-        customer_code: "746318",
+        customer_code: this.ids[this.config.type].id,
       },
       data: {},
     })
@@ -162,9 +195,8 @@ class Micronova extends utils.Adapter {
             this.json2iob.parse(id + ".general", device, { forceIndex: true });
             await this.requestClient({
               method: "post",
-              url: "https://remote.mcz.it/deviceGetRegistersMap",
+              url: this.ids[this.config.type].url + "/deviceGetRegistersMap",
               headers: {
-                Host: "remote.mcz.it",
                 id_brand: "1",
                 Accept: "application/json, text/javascript, */*; q=0.01",
                 Authorization: this.session.token,
@@ -172,7 +204,7 @@ class Micronova extends utils.Adapter {
                 "Content-Type": "application/json; charset=utf-8",
                 "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
                 local: "false",
-                customer_code: "746318",
+                customer_code: this.ids[this.config.type].id,
               },
               data: {
                 id_product: device.id_product,
@@ -220,9 +252,8 @@ class Micronova extends utils.Adapter {
 
       await this.requestClient({
         method: "post",
-        url: "https://remote.mcz.it/deviceGetBufferReading",
+        url: this.ids[this.config.type].url + "/deviceGetBufferReading",
         headers: {
-          Host: "remote.mcz.it",
           id_brand: "1",
           Accept: "application/json, text/javascript, */*; q=0.01",
           Authorization: this.session.token,
@@ -230,7 +261,7 @@ class Micronova extends utils.Adapter {
           "Content-Type": "application/json; charset=utf-8",
           "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
           local: "false",
-          customer_code: "746318",
+          customer_code: this.ids[this.config.type].id,
         },
         data: {
           id_product: device.id_product,
@@ -251,16 +282,15 @@ class Micronova extends utils.Adapter {
             this.log.debug("Waiting for response");
             response = await this.requestClient({
               method: "get",
-              url: "https://remote.mcz.it/deviceJobStatus/" + idRequest,
+              url: this.ids[this.config.type].url + "/deviceJobStatus/" + idRequest,
               headers: {
-                Host: "remote.mcz.it",
                 "Content-Type": "application/json; charset=utf-8",
                 "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
                 local: "false",
                 Accept: "application/json, text/javascript, */*; q=0.01",
                 "Accept-Language": "de-de",
                 Authorization: this.session.token,
-                customer_code: "746318",
+                customer_code: this.ids[this.config.type].id,
                 id_brand: "1",
               },
             })
@@ -374,9 +404,8 @@ class Micronova extends utils.Adapter {
         this.log.info(`Send data: ${JSON.stringify(data)}`);
         await this.requestClient({
           method: "post",
-          url: "https://remote.mcz.it/deviceRequestWriting",
+          url: this.ids[this.config.type].url + "/deviceRequestWriting",
           headers: {
-            Host: "remote.mcz.it",
             id_brand: "1",
             Accept: "application/json, text/javascript, */*; q=0.01",
             Authorization: this.session.token,
@@ -384,7 +413,7 @@ class Micronova extends utils.Adapter {
             "Content-Type": "application/json; charset=utf-8",
             "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
             local: "false",
-            customer_code: "746318",
+            customer_code: this.ids[this.config.type].id,
           },
           data: data,
         })

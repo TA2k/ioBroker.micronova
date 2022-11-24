@@ -37,7 +37,141 @@
         "zh-cn": "应用密码"
       }
     },
-
+    "type": {
+      "type": "select",
+      "newLine": true,
+      "sm": 3,
+      "options": [
+        {
+          "value": "eva",
+          "label": "EvaCalòr - PuntoFuoco"
+        },
+        {
+          "value": "elfi",
+          "label": "Elfire Wifi"
+        },
+        {
+          "value": "karm",
+          "label": "Karmek Wifi"
+        },
+        {
+          "value": "easy",
+          "label": "Easy Connect"
+        },
+        {
+          "value": "easyplus",
+          "label": "Easy Connect Plus"
+        },
+        {
+          "value": "easypoel",
+          "label": "Easy Connect Poêle"
+        },
+        {
+          "value": "lor",
+          "label": "Lorflam Home"
+        },
+        {
+          "value": "lmx",
+          "label": "LMX Remote Control"
+        },
+        {
+          "value": "bor",
+          "label": "Boreal Home"
+        },
+        {
+          "value": "bron",
+          "label": "Bronpi Home"
+        },
+        {
+          "value": "eoss",
+          "label": "EOSS WIFI"
+        },
+        {
+          "value": "lami",
+          "label": "LAMINOXREM REMOTE CONTROL 2.0"
+        },
+        {
+          "value": "jolly",
+          "label": "Jolly Mec Wi Fi"
+        },
+        {
+          "value": "globe",
+          "label": "Globe-fire"
+        },
+        {
+          "value": "ts",
+          "label": "TS Smart"
+        },
+        {
+          "value": "stuf",
+          "label": "Stufe a pellet Italia"
+        },
+        {
+          "value": "my",
+          "label": "My Corisit"
+        },
+        {
+          "value": "font",
+          "label": "Fonte Flamme contrôle 1"
+        },
+        {
+          "value": "klov",
+          "label": "Klover Home"
+        },
+        {
+          "value": "nord",
+          "label": "Nordic Fire 2.0"
+        },
+        {
+          "value": "go",
+          "label": "GO HEAT"
+        },
+        {
+          "value": "wip",
+          "label": "Wi-Phire"
+        },
+        {
+          "value": "ther",
+          "label": "Thermoflux"
+        },
+        {
+          "value": "dar",
+          "label": "Darwin Evolution"
+        },
+        {
+          "value": "mor",
+          "label": "Moretti design"
+        },
+        {
+          "value": "fon",
+          "label": "Fontana Forni"
+        },
+        {
+          "value": "myp",
+          "label": "MyPiazzetta (MySuperior?)"
+        },
+        {
+          "value": "alf",
+          "label": "Alfaplam"
+        },
+        {
+          "value": "nin",
+          "label": "Nina"
+        }
+      ],
+      "label": {
+        "en": "App Name",
+        "de": "App Name",
+        "ru": "Имя приложения",
+        "pt": "Nome do aplicativo",
+        "nl": "App Naam",
+        "fr": "App Name",
+        "it": "Nome dell'app",
+        "es": "Nombre de la aplicación",
+        "pl": "Nazwa",
+        "zh-cn": "附录"
+      }
+    },
     "interval": {
       "type": "number",
       "newLine": true,
