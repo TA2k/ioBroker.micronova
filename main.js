@@ -107,7 +107,6 @@ class Micronova extends utils.Adapter {
         Authorization: "6DFA47A6-1E78-44D8-A036-1363C171B3BB",
         "Accept-Language": "de-de",
         "Content-Type": "application/json; charset=utf-8",
-        "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
         local: "true",
         customer_code: this.ids[this.config.type].id,
       },
@@ -117,6 +116,7 @@ class Micronova extends utils.Adapter {
         this.log.debug(JSON.stringify(res.data));
         if (res.data) {
           this.session = res.data;
+          this.log.info("Login successful");
           this.setState("info.connection", true, true);
         }
       })
@@ -136,7 +136,6 @@ class Micronova extends utils.Adapter {
         Authorization: this.session.token,
         "Accept-Language": "de-de",
         "Content-Type": "application/json; charset=utf-8",
-        "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
         local: "false",
         customer_code: this.ids[this.config.type].id,
       },
@@ -202,7 +201,6 @@ class Micronova extends utils.Adapter {
                 Authorization: this.session.token,
                 "Accept-Language": "de-de",
                 "Content-Type": "application/json; charset=utf-8",
-                "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
                 local: "false",
                 customer_code: this.ids[this.config.type].id,
               },
@@ -259,7 +257,6 @@ class Micronova extends utils.Adapter {
           Authorization: this.session.token,
           "Accept-Language": "de-de",
           "Content-Type": "application/json; charset=utf-8",
-          "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
           local: "false",
           customer_code: this.ids[this.config.type].id,
         },
@@ -285,7 +282,6 @@ class Micronova extends utils.Adapter {
               url: this.ids[this.config.type].url + "/deviceJobStatus/" + idRequest,
               headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
                 local: "false",
                 Accept: "application/json, text/javascript, */*; q=0.01",
                 "Accept-Language": "de-de",
@@ -411,7 +407,6 @@ class Micronova extends utils.Adapter {
             Authorization: this.session.token,
             "Accept-Language": "de-de",
             "Content-Type": "application/json; charset=utf-8",
-            "User-Agent": "Easy%20Connect%20Plus/1.9.1 CFNetwork/1240.0.4 Darwin/20.6.0",
             local: "false",
             customer_code: this.ids[this.config.type].id,
           },
