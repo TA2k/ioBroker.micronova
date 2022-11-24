@@ -15,6 +15,39 @@
 
 Adapter for Micronova devices
 
+Hi ich habe ein neuen Adapter für Micronova geschrieben.
+Unterstütze Apps:
+
+EvaCalòr - PuntoFuoco
+Elfire Wifi
+Karmek Wifi
+Easy Connect
+Easy Connect Plus
+Easy Connect Poêle
+Lorflam Home
+LMX Remote Control
+Boreal Home
+Bronpi Home
+EOSS WIFI
+LAMINOXREM REMOTE CONTROL 2.0
+Jolly Mec Wi Fi
+Globe-fire
+TS Smart
+Stufe a pellet Italia
+My Corisit
+Fonte Flamme contrôle 1
+Klover Home
+Nordic Fire 2.0
+GO HEAT
+Wi-Phire
+Thermoflux
+Darwin Evolution
+Moretti design
+Fontana Forni
+MyPiazzetta (MySuperior?)
+Alfaplam
+Nina
+
 ## **Steuern**
 
 Es gibt setMethod. Eingabe ist das offset des register und value von enc_val oder eignen Wert eingegeben
