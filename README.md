@@ -24,6 +24,9 @@ offset von status_manged und für Value ON ist 85 OFF ist 170 also 232,170
 setzen der Temperatur auf 38Grad (temp_air = 32893 formular= /2 = 76/2 = 38
 32893, 76
 
+Status enthält den aktuellen Status
+Der passende Status zu Items02 ist dann unter Values02 zu finden. Der Wert unter Items ist dann der jeweilige Offset unter register
+
 ## Fragen Diskussion
 
 https://forum.iobroker.net/topic/59744/test-adapter-micronova-easy-connect-plus
