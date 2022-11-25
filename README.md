@@ -51,6 +51,8 @@ Nina
 ## **Steuern**
 
 Es gibt setMethod. Eingabe ist das offset des register und value von enc_val oder eignen Wert eingegeben
+Unter register sind alle offsets mit dem namen abgespeichert.
+
 Zb zum starten 232,85
 offset von status_manged und für Value ON ist 85 OFF ist 170 also 232,170
 
