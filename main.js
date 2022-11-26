@@ -417,7 +417,21 @@ class Micronova extends utils.Adapter {
           .then((res) => {
             this.log.info(JSON.stringify(res.data));
           })
-          .catch(async (error) => {
+          .catch((error) => {
+            if (error.response) {
+              if (error.response.status === 401) {
+                error.response && this.log.debug(JSON.stringify(error.response.data));
+                this.log.info(" receive 401 error. Refresh Token in 60 seconds");
+                this.refreshTokenTimeout && clearTimeout(this.refreshTokenTimeout);
+                this.refreshTokenTimeout = setTimeout(async () => {
+                  await this.refreshToken();
+                  this.setState(id, state.val, false);
+                }, 1000 * 60);
+
+                return;
+              }
+            }
+
             this.log.error(error);
             error.response && this.log.error(JSON.stringify(error.response.data));
           });
