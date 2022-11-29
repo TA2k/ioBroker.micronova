@@ -323,7 +323,7 @@ class Micronova extends utils.Adapter {
           if (error.response) {
             if (error.response.status === 401) {
               error.response && this.log.debug(JSON.stringify(error.response.data));
-              this.log.info(" receive 401 error. Refresh Token in 60 seconds");
+              this.log.info(" receive 401 error. Refresh Token in 30 seconds");
               this.refreshTokenTimeout && clearTimeout(this.refreshTokenTimeout);
               this.refreshTokenTimeout = setTimeout(async () => {
                 await this.refreshToken();
