@@ -325,9 +325,9 @@ class Micronova extends utils.Adapter {
               error.response && this.log.debug(JSON.stringify(error.response.data));
               this.log.info(" receive 401 error. Refresh Token in 60 seconds");
               this.refreshTokenTimeout && clearTimeout(this.refreshTokenTimeout);
-              this.refreshTokenTimeout = setTimeout(() => {
-                this.refreshToken();
-              }, 1000 * 60);
+              this.refreshTokenTimeout = setTimeout(async () => {
+                await this.refreshToken();
+              }, 1000 * 30);
 
               return;
             }
@@ -344,6 +344,32 @@ class Micronova extends utils.Adapter {
   async refreshToken() {
     this.log.debug("Refresh token");
     await this.login();
+    // await this.requestClient({
+    //   method: "post",
+    //   url: this.ids[this.config.type].url + "/refreshToken",
+    //   headers: {
+    //     id_brand: "1",
+    //     Accept: "application/json, text/javascript, */*; q=0.01",
+    //     Authorization: this.session.token,
+    //     "Accept-Language": "de-de",
+    //     "Content-Type": "application/json; charset=utf-8",
+    //     local: "true",
+    //     customer_code: this.ids[this.config.type].id,
+    //   },
+    //   data: { refresh_token: this.session.refresh_token },
+    // })
+    //   .then((res) => {
+    //     this.log.debug(JSON.stringify(res.data));
+    //     if (res.data) {
+    //       this.log.debug(`Refresh token success`);
+    //       this.session.token = res.data.token;
+    //       this.setState("info.connection", true, true);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     this.log.error(error);
+    //     error.response && this.log.error(JSON.stringify(error.response.data));
+    //   });
   }
 
   /**
