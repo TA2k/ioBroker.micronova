@@ -76,7 +76,8 @@
     "username": "",
     "password": "",
     "interval": 10,
-    "type": ""
+    "type": "",
+    "os": "36bcee2ebe0db37e"
   },
   "objects": [],
   "instanceObjects": [

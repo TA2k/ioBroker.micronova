@@ -172,6 +172,38 @@
         "zh-cn": "附录"
       }
     },
+    "os": {
+      "type": "select",
+      "newLine": true,
+      "sm": 3,
+      "options": [
+        {
+          "value": "36bcee2ebe0db37e",
+          "label": "Android"
+        },
+        {
+          "value": "6DFA47A6-1E78-44D8-A036-1363C171B3BB",
+          "label": "iOS ECP"
+        }
+        {
+          "value": "1c3be3cd-360c-4c9f-af15-1f79e9ccbc2a",
+          "label": "iOS EC"
+        }
+      ],
+      "label": {
+        "en": "App Operationsystem",
+        "de": "App-Betriebssystem (Wähle das andere Betriebssystem um automatisches ausloggen zu verhindern)",
+        "ru": "App Операционная система",
+        "pt": "Sistema de operação de aplicativos",
+        "nl": "Operatie",
+        "fr": "App Operationsystem",
+        "it": "Sistema operativo",
+        "es": "App Operationsystem",
+        "pl": "System operacyjny",
+        "uk": "Операційна система",
+        "zh-cn": "实施行动"
+      }
+    },
     "interval": {
       "type": "number",
       "newLine": true,
