@@ -48,6 +48,12 @@ MyPiazzetta (MySuperior?)
 Alfaplam
 Nina
 
+Bei Logout Problemen ein anderes Betriebssystem in den Einstellungen wählen
+
+## Login
+
+User und Password eingeben.
+
 ## **Steuern**
 
 Es gibt setMethod. Eingabe ist das offset des register und value von enc_val oder eignen Wert eingegeben
@@ -61,6 +67,22 @@ setzen der Temperatur auf 38Grad (temp_air = 32893 formular= /2 = 76/2 = 38
 
 Status enthält den aktuellen Status
 Der passende Status zu Items02 ist dann unter Values02 zu finden. Der Wert unter Items ist dann der jeweilige Offset unter register
+
+.status.Values19 Heizstufe
+32895,Wert für Heizstufe
+
+Zustand der Heizung
+Values02":
+
+0 = Ausgeschaltet
+1 = Zündung
+2 = Warten auf Flamme
+3 = Anlaufen
+4 = Heizen
+5 = Reinigung
+6 = Auskühlen/Abkühlen
+
+9 = keine Pellets vorhanden
 
 ## Fragen Diskussion
 
