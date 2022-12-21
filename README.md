@@ -90,7 +90,7 @@ https://forum.iobroker.net/topic/59744/test-adapter-micronova-easy-connect-plus
 
 ## Changelog
 
-### 0.0.1
+### 0.0.2
 
 - (TA2k) initial release
 
