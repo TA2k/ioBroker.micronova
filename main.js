@@ -505,8 +505,8 @@ class Micronova extends utils.Adapter {
                 common: {
                   name: remote.name || "",
                   type: remote.type || "boolean",
-                  role: remote.role || "boolean",
-                  def: remote.def || false,
+                  role: remote.role || "button",
+                  def: remote.def != null ? remote.def : false,
                   write: true,
                   read: true,
                 },
