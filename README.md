@@ -94,6 +94,8 @@ https://forum.iobroker.net/topic/59744/test-adapter-micronova-easy-connect-plus
 
 - (TA2k) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 
 MIT License
