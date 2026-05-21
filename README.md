@@ -90,6 +90,10 @@ https://forum.iobroker.net/topic/59744/test-adapter-micronova-easy-connect-plus
 
 ## Changelog
 
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 0.0.2
 
 - (TA2k) initial release
