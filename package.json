@@ -17,7 +17,7 @@
     "url": "https://github.com/TA2k/ioBroker.micronova.git"
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 22"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.7",
